@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "launch": "tsc && node dist/app.js && del-cli dist && del-cli types/**/*.js"
+  },
+  "devDependencies": {
+    "del-cli": "^6.0.0"
+  }
+}
