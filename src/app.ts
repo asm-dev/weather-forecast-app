@@ -1,8 +1,13 @@
-import { WeatherStatus } from "./types";
-import { Weather } from "./weather";
+import { WeatherStatus } from "./weather/model";
+import { Weather } from "./weather/weather";
 
-const todayWeather = new Weather(WeatherStatus.CLOUDY, {
-  minTemperature: 15,
-  maxTemperature: 30,
+const todayWeather = new Weather({
+  temperature: {
+    minTemperature: 15,
+    maxTemperature: 30,
+  },
+  weather: WeatherStatus.CLOUDY,
+  windSpeed: 20,
 });
+
 todayWeather.getAverageTemperature();

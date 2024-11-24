@@ -10,3 +10,9 @@ export type DailyTemperature = {
   minTemperature: number;
   maxTemperature: number;
 };
+
+export type WeatherModel = {
+  weather: WeatherStatus;
+  temperature: DailyTemperature;
+  windSpeed: number;
+};
