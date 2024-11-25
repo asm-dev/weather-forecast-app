@@ -1,6 +1,6 @@
 import { WeatherStatus, DailyTemperature, WeatherModel } from "./model";
 
-export class Weather {
+export class WeatherForecast {
   weather: WeatherStatus;
   temperature: DailyTemperature;
   windSpeed: number;
