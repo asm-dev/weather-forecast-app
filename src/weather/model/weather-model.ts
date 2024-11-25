@@ -16,3 +16,14 @@ export type WeatherModel = {
   temperature: DailyTemperature;
   windSpeed: number;
 };
+
+export const createEmptyWeatherModel = (): WeatherModel => {
+  return {
+    weather: WeatherStatus.SUNNY,
+    temperature: {
+      minTemperature: 0,
+      maxTemperature: 0,
+    },
+    windSpeed: 0,
+  };
+};

@@ -1,36 +1,45 @@
-import { WeatherStatus } from "./weather/model";
+import { createEmptyWeatherModel } from "./weather/model";
+import { WeeklyWeatherForecastService } from "./weather/service";
 import { WeatherForecast } from "./weather/weather-forecast";
 
-const TODAY_WEATHER_MOCK = new WeatherForecast({
-  temperature: {
-    minTemperature: 15,
-    maxTemperature: 30,
-  },
-  weather: WeatherStatus.CLOUDY,
-  windSpeed: 20,
-});
+const createDailyForecastMock = (minTemp: number, maxTemp: number) => {
+  return {
+    ...createEmptyWeatherModel(),
+    temperature: {
+      minTemperature: minTemp,
+      maxTemperature: maxTemp,
+    },
+  };
+};
 
-const YESTERDAY_WEATHER_MOCK: WeatherForecast = new WeatherForecast({
-  temperature: {
-    minTemperature: 5,
-    maxTemperature: 10,
-  },
-  weather: WeatherStatus.SUNNY,
-  windSpeed: 20,
-});
+const WEEKLY_WEATHER_FORECAST_MOCK: WeeklyWeatherForecastService =
+  new WeeklyWeatherForecastService({
+    monday: createDailyForecastMock(5, 10),
+    tuesday: createDailyForecastMock(5, 12),
+    wednesday: createDailyForecastMock(7, 13),
+    thursday: createDailyForecastMock(5, 9),
+    friday: createDailyForecastMock(10, 10),
+    saturday: createDailyForecastMock(5, 8),
+    sunday: createDailyForecastMock(8, 9),
+  });
 
-const WEATHER_DATA_MOCK: WeatherForecast[] = [
-  TODAY_WEATHER_MOCK,
-  YESTERDAY_WEATHER_MOCK,
-];
-
-const dailyAverage: number = WeatherForecast.getAverageDailyTemperature(
-  TODAY_WEATHER_MOCK.temperature
+const DAILY_WEATHER_FORECAST_MOCK: WeatherForecast = new WeatherForecast(
+  createDailyForecastMock(5, 10)
 );
 
-const totalAverage: number = WeatherForecast.getAverageTemperatureFromList(
-  WEATHER_DATA_MOCK.map((dailyData) => dailyData.temperature)
+console.log(
+  "Media diaria del lunes:",
+  Math.round(DAILY_WEATHER_FORECAST_MOCK.getAverageDailyTemperature())
 );
-
-console.log("Media diaria del día:", dailyAverage);
-console.log("Media del total de días:", totalAverage);
+console.log(
+  "Temperatura media de la semana:",
+  Math.round(WEEKLY_WEATHER_FORECAST_MOCK.getTemperatureAverage())
+);
+console.log(
+  "Media de las temperaturas mínimas de la semana:",
+  Math.round(WEEKLY_WEATHER_FORECAST_MOCK.getMinTemperatureAverage())
+);
+console.log(
+  "Media de las temperaturas máximas de la semana:",
+  Math.round(WEEKLY_WEATHER_FORECAST_MOCK.getMaxTemperatureAverage())
+);

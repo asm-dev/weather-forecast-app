@@ -1,4 +1,5 @@
 import { WeatherStatus, DailyTemperature, WeatherModel } from "./model";
+import { calculateAverageTemperature } from "./utils";
 
 export class WeatherForecast {
   weather: WeatherStatus;
@@ -12,11 +13,10 @@ export class WeatherForecast {
     this.windSpeed = windSpeed;
   }
 
-  public static getAverageDailyTemperature(
-    temperatureData: DailyTemperature
-  ): number {
-    return (
-      (temperatureData.maxTemperature + temperatureData.minTemperature) / 2
+  public getAverageDailyTemperature(): number {
+    return calculateAverageTemperature(
+      this.temperature.minTemperature,
+      this.temperature.maxTemperature
     );
   }
 }

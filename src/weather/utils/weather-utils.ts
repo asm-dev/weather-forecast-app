@@ -1,5 +1,6 @@
 import { DailyTemperature } from "../model";
 
 export const calculateAverageTemperature = (
-  temperature: DailyTemperature
-): number => (temperature.maxTemperature + temperature.minTemperature) / 2;
+  minTemp: number,
+  maxTemp: number
+): number => (minTemp + maxTemp) / 2;
