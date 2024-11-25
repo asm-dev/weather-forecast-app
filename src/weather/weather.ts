@@ -12,11 +12,24 @@ export class Weather {
     this.windSpeed = windSpeed;
   }
 
-  getAverageTemperature(): number {
-    const average =
-      (this.temperature.minTemperature + this.temperature.maxTemperature) / 2;
-    console.log(`La temperatura media es: ${average}`);
+  public static getAverageDailyTemperature(
+    temperatureData: DailyTemperature
+  ): number {
+    return (
+      (temperatureData.maxTemperature + temperatureData.minTemperature) / 2
+    );
+  }
 
-    return average;
+  public static getAverageTemperatureFromList(
+    data: DailyTemperature[]
+  ): number {
+    const averageTemperaturesList = data.map(this.getAverageDailyTemperature);
+    const totalDays = data.length;
+    const temperatureSum = averageTemperaturesList.reduce(
+      (sum, dailyAverage) => sum + dailyAverage,
+      0
+    );
+
+    return temperatureSum / totalDays;
   }
 }
