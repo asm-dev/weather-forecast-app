@@ -1,6 +1,6 @@
 import { WeatherStatus, DailyTemperature, WeatherModel } from "./model";
 
-export class Weather {
+export class WeatherForecast {
   weather: WeatherStatus;
   temperature: DailyTemperature;
   windSpeed: number;
@@ -18,18 +18,5 @@ export class Weather {
     return (
       (temperatureData.maxTemperature + temperatureData.minTemperature) / 2
     );
-  }
-
-  public static getAverageTemperatureFromList(
-    data: DailyTemperature[]
-  ): number {
-    const averageTemperaturesList = data.map(this.getAverageDailyTemperature);
-    const totalDays = data.length;
-    const temperatureSum = averageTemperaturesList.reduce(
-      (sum, dailyAverage) => sum + dailyAverage,
-      0
-    );
-
-    return temperatureSum / totalDays;
   }
 }

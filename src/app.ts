@@ -1,5 +1,5 @@
 import { WeatherStatus } from "./weather/model";
-import { WeatherForecast } from "./weather/weather";
+import { WeatherForecast } from "./weather/weather-forecast";
 
 const TODAY_WEATHER_MOCK = new WeatherForecast({
   temperature: {
