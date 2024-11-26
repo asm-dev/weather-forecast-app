@@ -1,4 +1,4 @@
-import { WeeklyWeatherModel } from "../model";
+import { WeeklyWeatherModel } from "../model/weekly-weather-model";
 
 export const renderWeeklyForecast = (weeklyData: WeeklyWeatherModel): void => {
   const days = Object.keys(weeklyData) as Array<keyof WeeklyWeatherModel>;

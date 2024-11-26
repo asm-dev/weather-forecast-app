@@ -1,5 +1,6 @@
-import { DailyTemperature, WeeklyWeatherModel } from "../model";
-import { calculateAverageTemperature } from "../utils";
+import { DailyTemperature } from "../model/weather-model";
+import { WeeklyWeatherModel } from "../model/weekly-weather-model";
+import { calculateAverageTemperature } from "../utils/calculate-average-temperature";
 
 export class WeeklyWeatherForecastService {
   forecastData: WeeklyWeatherModel;

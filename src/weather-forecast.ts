@@ -1,5 +1,9 @@
-import { WeatherStatus, DailyTemperature, WeatherModel } from "./model";
-import { calculateAverageTemperature } from "./utils";
+import {
+  WeatherStatus,
+  DailyTemperature,
+  WeatherModel,
+} from "./model/weather-model";
+import { calculateAverageTemperature } from "./utils/calculate-average-temperature";
 
 export class WeatherForecast {
   weather: WeatherStatus;

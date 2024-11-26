@@ -1,7 +1,8 @@
-import { createEmptyWeatherModel, WeeklyWeatherModel } from "./weather/model";
-import { WeeklyWeatherForecastService } from "./weather/service";
-import { WeatherForecast } from "./weather/weather-forecast";
-import { renderWeeklyForecast } from "./weather/views/weather-view";
+import { createEmptyWeatherModel } from "./model/weather-model";
+import { WeeklyWeatherModel } from "./model/weekly-weather-model";
+import { WeeklyWeatherForecastService } from "./service/weekly-weather-forecast-service";
+import { renderWeeklyForecast } from "./views/weather-view";
+import { WeatherForecast } from "./weather-forecast";
 
 const createDailyForecastMock = (minTemp: number, maxTemp: number) => {
   return {
@@ -30,25 +31,22 @@ const DAILY_WEATHER_FORECAST_MOCK: WeatherForecast = new WeatherForecast(
   createDailyForecastMock(5, 10)
 );
 
-console.log(
-  "Media diaria del lunes:",
-  Math.round(DAILY_WEATHER_FORECAST_MOCK.getAverageDailyTemperature())
-);
-console.log(
-  "Temperatura media de la semana:",
-  Math.round(WEEKLY_WEATHER_FORECAST_MOCK.getTemperatureAverage())
-);
-console.log(
-  "Media de las temperaturas mínimas de la semana:",
-  Math.round(WEEKLY_WEATHER_FORECAST_MOCK.getMinTemperatureAverage())
-);
-console.log(
-  "Media de las temperaturas máximas de la semana:",
-  Math.round(WEEKLY_WEATHER_FORECAST_MOCK.getMaxTemperatureAverage())
-);
-
-//TODO: Revisar si esto está haciendo algo, ya que el contenedor renderiza vacío.
-//También revisar consolelogs desde el navegador ya que la terminal desde el cambio del package no los refleja
 document.addEventListener("DOMContentLoaded", () => {
+  console.log(
+    "Media diaria del lunes:",
+    Math.round(DAILY_WEATHER_FORECAST_MOCK.getAverageDailyTemperature())
+  );
+  console.log(
+    "Temperatura media de la semana:",
+    Math.round(WEEKLY_WEATHER_FORECAST_MOCK.getTemperatureAverage())
+  );
+  console.log(
+    "Media de las temperaturas mínimas de la semana:",
+    Math.round(WEEKLY_WEATHER_FORECAST_MOCK.getMinTemperatureAverage())
+  );
+  console.log(
+    "Media de las temperaturas máximas de la semana:",
+    Math.round(WEEKLY_WEATHER_FORECAST_MOCK.getMaxTemperatureAverage())
+  );
   renderWeeklyForecast(WEEKLY_WEATHER_MODEL_MOCK);
 });

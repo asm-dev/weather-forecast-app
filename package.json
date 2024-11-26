@@ -1,6 +1,9 @@
 {
   "scripts": {
-  "launch": "tsc && live-server --open=index.html",
-  "build": "tsc"
-}
+    "launch": "tsc && live-server --no-browser --open=index.html",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.0"
+  }
 }
