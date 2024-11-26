@@ -1,6 +1,7 @@
-import { createEmptyWeatherModel } from "./weather/model";
+import { createEmptyWeatherModel, WeeklyWeatherModel } from "./weather/model";
 import { WeeklyWeatherForecastService } from "./weather/service";
 import { WeatherForecast } from "./weather/weather-forecast";
+import { renderWeeklyForecast } from "./weather/views/weather-view";
 
 const createDailyForecastMock = (minTemp: number, maxTemp: number) => {
   return {
@@ -12,16 +13,18 @@ const createDailyForecastMock = (minTemp: number, maxTemp: number) => {
   };
 };
 
+const WEEKLY_WEATHER_MODEL_MOCK: WeeklyWeatherModel = {
+  monday: createDailyForecastMock(5, 10),
+  tuesday: createDailyForecastMock(5, 12),
+  wednesday: createDailyForecastMock(7, 13),
+  thursday: createDailyForecastMock(5, 9),
+  friday: createDailyForecastMock(10, 10),
+  saturday: createDailyForecastMock(5, 8),
+  sunday: createDailyForecastMock(8, 9),
+};
+
 const WEEKLY_WEATHER_FORECAST_MOCK: WeeklyWeatherForecastService =
-  new WeeklyWeatherForecastService({
-    monday: createDailyForecastMock(5, 10),
-    tuesday: createDailyForecastMock(5, 12),
-    wednesday: createDailyForecastMock(7, 13),
-    thursday: createDailyForecastMock(5, 9),
-    friday: createDailyForecastMock(10, 10),
-    saturday: createDailyForecastMock(5, 8),
-    sunday: createDailyForecastMock(8, 9),
-  });
+  new WeeklyWeatherForecastService(WEEKLY_WEATHER_MODEL_MOCK);
 
 const DAILY_WEATHER_FORECAST_MOCK: WeatherForecast = new WeatherForecast(
   createDailyForecastMock(5, 10)
@@ -43,3 +46,9 @@ console.log(
   "Media de las temperaturas máximas de la semana:",
   Math.round(WEEKLY_WEATHER_FORECAST_MOCK.getMaxTemperatureAverage())
 );
+
+//TODO: Revisar si esto está haciendo algo, ya que el contenedor renderiza vacío.
+//También revisar consolelogs desde el navegador ya que la terminal desde el cambio del package no los refleja
+document.addEventListener("DOMContentLoaded", () => {
+  renderWeeklyForecast(WEEKLY_WEATHER_MODEL_MOCK);
+});
