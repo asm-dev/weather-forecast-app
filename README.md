@@ -13,6 +13,7 @@ Segunda version
 
 ## Para ejecutar el proyecto:
 
-npm install
-npm run launch
+``npm install``
+
+``npm run launch``
 
