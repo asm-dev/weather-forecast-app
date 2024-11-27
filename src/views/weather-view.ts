@@ -1,21 +1,28 @@
-import { WeeklyWeatherModel } from "../model/weather-model.js";
+import { WeatherModel, WeeklyWeatherModel } from "../model/weather-model.js";
+import { capitalise } from "../utils/capitalise-first-char.js";
 
-//TODO: Simplify logic here!
+const fromWeatherDataToHTMLMap = (
+  day: string,
+  weatherData: WeatherModel
+): string => {
+  const capitalisedDay = capitalise(day);
+
+  return `
+    <div class="forecast-day">
+      <h3>${capitalisedDay}</h3>
+      <p>Clima: ${weatherData.weather}</p>
+      <p>Temp: ${weatherData.temperature.minTemperature}°C - ${weatherData.temperature.maxTemperature}°C</p>
+      <p>Viento: ${weatherData.windSpeed} km/h</p>
+    </div>`;
+};
 
 export const renderWeeklyForecast = (weeklyData: WeeklyWeatherModel): void => {
-  const days = Object.keys(weeklyData) as Array<keyof WeeklyWeatherModel>;
-  const forecastContainer = document.getElementById("forecast-container");
+  const weeklyDataList = Object.entries(weeklyData);
 
-  forecastContainer.innerHTML = days
-    .map((day) => {
-      const { weather, temperature, windSpeed } = weeklyData[day];
-      return `
-        <div class="forecast-day">
-          <h3>${day}</h3>
-          <p>Clima: ${weather}</p>
-          <p>Temp: ${temperature.minTemperature}°C - ${temperature.maxTemperature}°C</p>
-          <p>Viento: ${windSpeed} km/h</p>
-        </div>`;
-    })
+  const forecastContainer = document.getElementById("forecast-container");
+  forecastContainer.innerHTML = "";
+
+  forecastContainer.innerHTML = weeklyDataList
+    .map(([day, weather]) => fromWeatherDataToHTMLMap(day, weather))
     .join("");
 };

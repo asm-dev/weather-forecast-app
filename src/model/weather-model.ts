@@ -16,7 +16,6 @@ export type WeatherModel = {
   temperature: DailyTemperature;
   windSpeed: number;
 };
-
 export interface WeeklyWeatherModel {
   monday: WeatherModel;
   tuesday: WeatherModel;
