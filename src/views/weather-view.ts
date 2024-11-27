@@ -1,10 +1,10 @@
-import { WeeklyWeatherModel } from "../model/weekly-weather-model";
+import { WeeklyWeatherModel } from "../model/weather-model.js";
+
+//TODO: Simplify logic here!
 
 export const renderWeeklyForecast = (weeklyData: WeeklyWeatherModel): void => {
   const days = Object.keys(weeklyData) as Array<keyof WeeklyWeatherModel>;
   const forecastContainer = document.getElementById("forecast-container");
-
-  console.log("encuentro FORECAST CONTAINER -->", forecastContainer);
 
   forecastContainer.innerHTML = days
     .map((day) => {

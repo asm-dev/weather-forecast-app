@@ -17,6 +17,16 @@ export type WeatherModel = {
   windSpeed: number;
 };
 
+export interface WeeklyWeatherModel {
+  monday: WeatherModel;
+  tuesday: WeatherModel;
+  wednesday: WeatherModel;
+  thursday: WeatherModel;
+  friday: WeatherModel;
+  saturday: WeatherModel;
+  sunday: WeatherModel;
+}
+
 export const createEmptyWeatherModel = (): WeatherModel => {
   return {
     weather: WeatherStatus.SUNNY,

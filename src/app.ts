@@ -1,8 +1,10 @@
-import { createEmptyWeatherModel } from "./model/weather-model";
-import { WeeklyWeatherModel } from "./model/weekly-weather-model";
-import { WeeklyWeatherForecastService } from "./service/weekly-weather-forecast-service";
-import { renderWeeklyForecast } from "./views/weather-view";
-import { WeatherForecast } from "./weather-forecast";
+import {
+  createEmptyWeatherModel,
+  WeeklyWeatherModel,
+} from "./model/weather-model.js";
+import { WeeklyWeatherForecastService } from "./service/weekly-weather-forecast-service.js";
+import { renderWeeklyForecast } from "./views/weather-view.js";
+import { WeatherForecast } from "./weather-forecast.js";
 
 const createDailyForecastMock = (minTemp: number, maxTemp: number) => {
   return {
