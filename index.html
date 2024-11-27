@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="./src/styles/weather-style.css" />
+  </head>
+  <body>
+    <h1>Weekly Weather Forecast Information</h1>
+    <div id="forecast-container"></div>
+    <script type="module" src="dist/app.js" defer></script>
+    <script type="module" src="dist/model/weather-model.js"></script>
+    <script
+      type="module"
+      src="dist/service/weekly-weather-forecast-service.js"
+    ></script>
+    <script type="module" src="dist/views/weather-view.js"></script>
+    <script type="module" src="dist/weather-forecast.js"></script>
+    <script
+      type="module"
+      src="dist/utils/calculate-average-temperature.js"
+    ></script>
+  </body>
+</html>

@@ -1,6 +1,16 @@
 # Weather app
 
-Web que muestra un pronóstico del tiempo para 7 días
+Esta aplicación muestra datos del tiempo para una semana utilizando JS con TypeScript. La app emplea lógica de servicios para el cálculo de promedios y renderiza la información en el DOM meadiante el uso de una interfaz sencilla.
 
-  ![image](https://github.com/user-attachments/assets/1411026b-336a-44d2-8582-dd3b21a30886)
+Primera version
+![image](https://github.com/user-attachments/assets/45ce8664-0150-4c81-9135-97c93088fce2)
+
+Segunda version
+![image](https://github.com/user-attachments/assets/71f2ad14-5073-4ed1-ba38-da684816dcc0)
+
+
+## Para ejecutar el proyecto:
+
+npm install
+npm run launch
 

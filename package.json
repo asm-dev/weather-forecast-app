@@ -1,8 +1,10 @@
 {
   "scripts": {
-    "launch": "tsc && node dist/app.js && del-cli dist && del-cli types/**/*.js"
+    "launch": "tsc && live-server --no-browser --open=index.html",
+    "build": "tsc"
   },
   "devDependencies": {
-    "del-cli": "^6.0.0"
+    "@types/node": "^22.10.0",
+    "live-server": "^1.2.0"
   }
 }

@@ -1,0 +1,29 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 1rem;
+}
+
+#forecast-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.forecast-day {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  width: 200px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-day h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.forecast-day p {
+  margin: 0.3rem 0;
+}
