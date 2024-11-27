@@ -1,4 +1,4 @@
-# Weather app
+# Weather Forecast App
 
 Esta aplicación muestra datos del tiempo para una semana utilizando JS con TypeScript. La app emplea lógica de servicios para el cálculo de promedios y renderiza la información en el DOM meadiante el uso de una interfaz sencilla.
 
