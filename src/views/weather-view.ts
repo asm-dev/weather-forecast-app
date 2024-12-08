@@ -1,5 +1,6 @@
 import { WeatherModel, WeeklyWeatherModel } from "../model/weather-model.js";
 import { capitalise } from "../utils/capitalise-first-char.js";
+import { generateRandomWeatherData } from "../utils/generate-random-weather-data.js";
 
 let weekCounter = 1;
 
@@ -30,7 +31,6 @@ export const renderWeeklyForecast = (
   weekNumber: string
 ): void => {
   const forecastContainer = document.getElementById("forecast-container");
-  forecastContainer.innerHTML = "";
 
   const weekContainer = document.createElement("div");
   weekContainer.classList.add("weekly-weather-container");
@@ -47,15 +47,18 @@ export const renderWeeklyForecast = (
   const buttonContainer = document.createElement("div");
   weekContainer.classList.add("buttons-container");
 
-  const updateButton = document.createElement("button");
-  updateButton.textContent = "Agregar nueva semana";
-  updateButton.addEventListener("click", () => console.log("TODO"));
+  const addButton = document.createElement("button");
+  addButton.textContent = "Agregar nueva semana";
+  addButton.addEventListener("click", () => {
+    const newWeekData = generateRandomWeatherData();
+    renderWeeklyForecast(newWeekData, (++weekCounter).toString());
+  });
 
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Borrar semana";
   deleteButton.addEventListener("click", () => deleteWeek(weekContainer));
 
-  buttonContainer.appendChild(updateButton);
+  buttonContainer.appendChild(addButton);
   buttonContainer.appendChild(deleteButton);
   weekContainer.appendChild(buttonContainer);
 
