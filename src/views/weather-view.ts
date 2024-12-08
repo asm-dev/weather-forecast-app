@@ -31,7 +31,6 @@ export const renderWeeklyForecast = (
   weekNumber: string
 ): void => {
   const forecastContainer = document.getElementById("forecast-container");
-  forecastContainer.innerHTML = "";
 
   const weekContainer = document.createElement("div");
   weekContainer.classList.add("weekly-weather-container");
