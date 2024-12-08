@@ -50,5 +50,5 @@ document.addEventListener("DOMContentLoaded", () => {
     "Media de las temperaturas máximas de la semana:",
     Math.round(WEEKLY_WEATHER_FORECAST_MOCK.getMaxTemperatureAverage())
   );
-  renderWeeklyForecast(WEEKLY_WEATHER_MODEL_MOCK);
+  renderWeeklyForecast(WEEKLY_WEATHER_MODEL_MOCK, "1");
 });
