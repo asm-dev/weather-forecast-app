@@ -2,7 +2,32 @@ import { WeatherModel, WeeklyWeatherModel } from "../model/weather-model.js";
 import { capitalise } from "../utils/capitalise-first-char.js";
 import { generateRandomWeatherData } from "../utils/generate-random-weather-data.js";
 
-let weekCounter = 1;
+export const renderWeeklyForecast = (weeklyData: WeeklyWeatherModel): void => {
+  const mainContainer = document.getElementById("forecast-container");
+  const week = createDIV();
+  const cards = createDIV();
+
+  if (!hasAddbutton) {
+    createAddbutton(mainContainer);
+  }
+
+  week.classList.add("weekly-weather-container");
+  cards.innerHTML = fromDataToWeeklyWeatherCardHTML(weeklyData);
+
+  createDeletebutton(cards, week);
+  week.appendChild(cards);
+  mainContainer.appendChild(week);
+};
+
+const fromDataToWeeklyWeatherCardHTML = (
+  weeklyData: WeeklyWeatherModel
+): string => {
+  const weeklyDataList = Object.entries(weeklyData);
+
+  return weeklyDataList
+    .map(([day, weather]) => createDailyWeatherCard(day, weather))
+    .join("");
+};
 
 const createDailyWeatherCard = (day: string, weatherData: WeatherModel) => {
   const capitalisedDay = capitalise(day);
@@ -16,73 +41,36 @@ const createDailyWeatherCard = (day: string, weatherData: WeatherModel) => {
     </div>`;
 };
 
-const fromDataToWeeklyWeatherCardHTML = (
-  weeklyData: WeeklyWeatherModel
-): string => {
-  const weeklyDataList = Object.entries(weeklyData);
-
-  return weeklyDataList
-    .map(([day, weather]) => createDailyWeatherCard(day, weather))
-    .join("");
+const createDeletebutton = (
+  parentContainer: HTMLElement,
+  affectedWeek: HTMLDivElement
+): void => {
+  const button = document.createElement("button");
+  button.textContent = "Borrar semana";
+  button.classList.add("delete-week-button");
+  button.addEventListener("click", () => deleteWeek(affectedWeek));
+  parentContainer.appendChild(button);
 };
 
-export const renderWeeklyForecast = (
-  weeklyData: WeeklyWeatherModel,
-  weekNumber: string
-): void => {
-  const forecastContainer = document.getElementById("forecast-container");
-
-  const weekContainer = document.createElement("div");
-  weekContainer.classList.add("weekly-weather-container");
-  weekContainer.dataset.week = weekNumber;
-
-  const weekHeader = document.createElement("h2");
-  weekHeader.textContent = `Semana núm. ${weekNumber}`;
-  weekContainer.appendChild(weekHeader);
-
-  const cardsContainer = document.createElement("div");
-  cardsContainer.innerHTML = fromDataToWeeklyWeatherCardHTML(weeklyData);
-  weekContainer.appendChild(cardsContainer);
-
-  const buttonContainer = document.createElement("div");
-  weekContainer.classList.add("buttons-container");
-
-  const addButton = document.createElement("button");
-  addButton.textContent = "Agregar nueva semana";
-  addButton.addEventListener("click", () => {
-    const newWeekData = generateRandomWeatherData();
-    renderWeeklyForecast(newWeekData, (++weekCounter).toString());
-  });
-
-  const deleteButton = document.createElement("button");
-  deleteButton.textContent = "Borrar semana";
-  deleteButton.addEventListener("click", () => deleteWeek(weekContainer));
-
-  buttonContainer.appendChild(addButton);
-  buttonContainer.appendChild(deleteButton);
-  weekContainer.appendChild(buttonContainer);
-
-  forecastContainer.appendChild(weekContainer);
+const createAddbutton = (parentContainer: HTMLElement): void => {
+  const button = document.createElement("button");
+  button.textContent = "Agregar nueva semana";
+  button.classList.add("add-week-button");
+  button.addEventListener("click", () => addRandomWeek());
+  parentContainer.appendChild(button);
 };
 
 const deleteWeek = (weekContainer: HTMLDivElement): void => {
   const forecastContainer = document.getElementById("forecast-container");
   forecastContainer.removeChild(weekContainer);
-
-  weekCounter--;
-  updateWeekHeaders();
 };
 
-const updateWeekHeaders = () => {
-  const weekContainerNodeList = document.querySelectorAll(
-    ".weekly-weather-container"
-  );
-
-  weekContainerNodeList.forEach((week, index) => {
-    const weekHeader = week.querySelector("h2");
-    weekHeader.textContent = `Semana ${index + 1}`;
-    (week as HTMLElement).dataset.week = (index + 1).toString();
-  });
-
-  weekCounter = weekContainerNodeList.length;
+const addRandomWeek = (): void => {
+  const randomWeekData = generateRandomWeatherData();
+  renderWeeklyForecast(randomWeekData);
 };
+
+const hasAddbutton = (): boolean =>
+  document.getElementsByClassName("add-week-button").length !== 0;
+
+const createDIV = (): HTMLDivElement => document.createElement("div");
