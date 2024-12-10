@@ -10,7 +10,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  min-height: 100vh;
 }
 
 h1 {
@@ -24,83 +23,79 @@ h1 {
 #forecast-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 2em;
   justify-content: center;
   align-items: flex-start;
   width: 100%;
   overflow-x: auto;
 }
 
-.weekly-weather-container {
+.weekly-weather-container > div {
   background-color: #ffffff;
   border: 1px solid #dfe4ea;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 1em;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  min-width: 300px;
+  gap: 1em;
+  margin: 0.25em 2em 0.25em 2em;
 }
 
 .weekly-weather-container h2 {
   font-size: 1.5rem;
   font-weight: 500;
-  margin-bottom: 20px;
 }
 
 .daily-forecast-card {
   background-color: #eaf2f8;
   border: 1px solid #c5d9e8;
-  border-radius: 6px;
-  padding: 15px;
+  border-radius: 8px;
   text-align: left;
-  margin: 10px;
-  flex: 1 0 auto;
-  min-width: 50px;
+  padding: 0.5em;
 }
 
 .daily-forecast-card h3 {
   font-size: 1rem;
   color: #34495e;
-  margin-bottom: 10px;
 }
 
 .daily-forecast-card p {
-  font-size: 0.9rem;
-  margin: 5px 0;
+  font-size: 0.75rem;
 }
 
 button {
-  background-color: #3498db;
   color: #ffffff;
   border: none;
   border-radius: 4px;
-  padding: 10px 15px;
   font-size: 1rem;
   cursor: pointer;
-  margin-top: 10px;
-  margin-right: 10px;
   transition: background-color 0.3s;
+  padding: 0.5em 1em 0.5em 1em;
 }
 
-button:hover {
+.add-week-button {
+  background-color: #3498db;
+}
+
+.add-week-button:hover {
   background-color: #2980b9;
 }
 
-button:active {
+.add-week-button:active {
   background-color: #1c658c;
 }
 
-button:last-child {
+.delete-week-button {
   background-color: #d6796d;
 }
 
-button:last-child:hover {
+.delete-week-button:last-child:hover {
   background-color: #a93226;
 }
 
-button:last-child:active {
+.delete-week-button:last-child:active {
   background-color: #922b21;
 }
 
@@ -114,12 +109,4 @@ button:last-child:active {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.weekly-weather-container button {
-  margin-top: 10px;
-}
-
-.weekly-weather-container button:last-child {
-  margin-right: 0;
 }
