@@ -88,14 +88,14 @@ button {
 }
 
 .delete-week-button {
-  background-color: #d6796d;
+  background-color: #bf5648;
 }
 
-.delete-week-button:last-child:hover {
+.delete-week-button:hover {
   background-color: #a93226;
 }
 
-.delete-week-button:last-child:active {
+.delete-week-button:active {
   background-color: #922b21;
 }
 
@@ -109,4 +109,10 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.avg-temperature {
+  border: 1px solid grey;
+  border-radius: 6px;
+  padding: 10px;
 }
