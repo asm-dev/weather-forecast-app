@@ -23,24 +23,24 @@ h1 {
 #forecast-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 2em;
+  gap: 2rem;
   justify-content: center;
   align-items: flex-start;
-  width: 100%;
-  overflow-x: auto;
 }
 
-.weekly-weather-container > div {
+.weekly-weather-container {
   background-color: #ffffff;
   border: 1px solid #dfe4ea;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1em;
+  padding: 1rem;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
-  gap: 1em;
-  margin: 0.25em 2em 0.25em 2em;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0.25rem 2rem 0.25em 2rem;
 }
 
 .weekly-weather-container h2 {
@@ -49,20 +49,29 @@ h1 {
 }
 
 .daily-forecast-card {
+  display: flex;
+  flex-direction: column;
   background-color: #eaf2f8;
   border: 1px solid #c5d9e8;
   border-radius: 8px;
   text-align: left;
-  padding: 0.5em;
+  padding: 0.5rem 1.5rem;
 }
 
 .daily-forecast-card h3 {
   font-size: 1rem;
+  margin: 10px 0px 5px 0px;
   color: #34495e;
 }
 
-.daily-forecast-card p {
+.daily-forecast-card p,
+ul,
+li {
   font-size: 0.75rem;
+}
+
+.daily-forecast-card ul {
+  padding-left: 1rem;
 }
 
 button {
@@ -72,7 +81,7 @@ button {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s;
-  padding: 0.5em 1em 0.5em 1em;
+  padding: 0.5rem 1rem 0.5rem 1rem;
 }
 
 .add-week-button {
@@ -89,6 +98,7 @@ button {
 
 .delete-week-button {
   background-color: #bf5648;
+  align-self: center;
 }
 
 .delete-week-button:hover {
@@ -112,7 +122,9 @@ button {
 }
 
 .avg-temperature {
-  border: 1px solid grey;
+  font-size: 1rem;
+  border: 1px solid rgb(167, 167, 167);
   border-radius: 6px;
   padding: 10px;
+  margin: 0;
 }

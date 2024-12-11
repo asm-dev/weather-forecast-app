@@ -7,17 +7,19 @@ import { Weather } from "../weather.js";
 export const renderWeeklyForecast = (weeklyData: WeeklyWeatherModel): void => {
   const mainContainer = document.getElementById("forecast-container");
   const week = createDIV();
-  const cards = createDIV();
+  const cards = generateWeekHTML(weeklyData);
+  const footer = createDIV();
 
   if (!hasAddButton()) {
     createAddButton(mainContainer);
   }
 
-  cards.innerHTML = generateWeekHTML(weeklyData);
+  week.innerHTML = cards;
   week.classList.add("weekly-weather-container");
 
-  createDeletebutton(cards, week);
-  week.appendChild(cards);
+  createDeletebutton(footer, week);
+
+  week.appendChild(footer);
   mainContainer.appendChild(week);
 };
 
@@ -30,7 +32,7 @@ const generateWeekHTML = (weeklyData: WeeklyWeatherModel): string => {
     .map(([day, weather]) => createDailyWeatherCard(day, weather))
     .join("").concat(`
       <div class="avg-temperature">
-        <p>Temperatura media: ${temperatureAvg}</p>
+        <p>Temperatura media: ${temperatureAvg}°C</p>
       </div>`);
 };
 
@@ -46,14 +48,16 @@ const createDailyWeatherCard = (
   return `
     <div class="daily-forecast-card">
       <h3>${capitalisedDay}</h3>
-      <p>Clima: ${weatherData.weather}</p>
-      <p>Temperatura: 
-        <ul>
-          <li>Mínima: ${weatherData.temperature.minTemperature}°C</li>
-          <li>Máxima: ${weatherData.temperature.maxTemperature}°C</li>
-          <li>Media: ${averageTemperature}°C</li>
-        </ul>
-      <p>Viento: ${weatherData.windSpeed} km/h</p>
+      <article>
+        <p>Clima: ${weatherData.weather}</p>
+        <p>Temperatura: 
+          <ul>
+            <li>Mínima: ${weatherData.temperature.minTemperature}°C</li>
+            <li>Máxima: ${weatherData.temperature.maxTemperature}°C</li>
+            <li>Media: ${averageTemperature}°C</li>
+          </ul>
+        <p>Viento: ${weatherData.windSpeed} km/h</p>
+      </article>
     </div>`;
 };
 
@@ -69,7 +73,6 @@ const createDeletebutton = (
 };
 
 const createAddButton = (parentContainer: HTMLElement): void => {
-  console.log("paso por aqui? ------");
   const button = document.createElement("button");
   button.textContent = "Agregar nueva semana";
   button.classList.add("add-week-button");
