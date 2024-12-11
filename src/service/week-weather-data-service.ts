@@ -4,41 +4,43 @@ import {
 } from "../model/weather-model.js";
 import { calculateAverageTemperature } from "../utils/calculate-average-temperature.js";
 
-export class WeeklyWeatherForecastService {
-  forecastData: WeeklyWeatherModel;
-  temperatureData: DailyTemperature[];
+export class WeeklyWeatherService {
+  weekForecast: WeeklyWeatherModel;
+  weekTemperatureData: DailyTemperature[];
 
   constructor(weeklyForecast: WeeklyWeatherModel) {
-    this.forecastData = weeklyForecast;
-    this.temperatureData = this.dailyTemperatureList;
+    this.weekForecast = weeklyForecast;
+    this.weekTemperatureData = this.dailyTemperatureList;
   }
 
   private get dailyTemperatureList(): DailyTemperature[] {
-    const weatherData = Object.values(this.forecastData);
+    const weatherData = Object.values(this.weekForecast);
 
-    return weatherData.map((dailyForecast) => dailyForecast.temperature);
+    return weatherData.map((dayData) => dayData.temperature);
   }
 
   public getMinTemperatureAverage(): number {
-    const minTemperatureSum = this.temperatureData
+    const minTemperatureSum = this.weekTemperatureData
       .map((dailyTemperature) => dailyTemperature.minTemperature)
       .reduce((sum, dailyAverage) => sum + dailyAverage, 0);
 
-    return minTemperatureSum / this.temperatureData.length;
+    return Math.round(minTemperatureSum / this.weekTemperatureData.length);
   }
 
   public getMaxTemperatureAverage(): number {
-    const maxTemperatureSum = this.temperatureData
+    const maxTemperatureSum = this.weekTemperatureData
       .map((dailyTemperature) => dailyTemperature.maxTemperature)
       .reduce((sum, dailyAverage) => sum + dailyAverage, 0);
 
-    return maxTemperatureSum / this.temperatureData.length;
+    return Math.round(maxTemperatureSum / this.weekTemperatureData.length);
   }
 
   public getTemperatureAverage(): number {
-    return calculateAverageTemperature(
+    const result = calculateAverageTemperature(
       this.getMinTemperatureAverage(),
       this.getMaxTemperatureAverage()
     );
+
+    return Math.round(result);
   }
 }

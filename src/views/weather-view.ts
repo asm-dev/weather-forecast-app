@@ -1,43 +1,63 @@
 import { WeatherModel, WeeklyWeatherModel } from "../model/weather-model.js";
+import { WeeklyWeatherService } from "../service/week-weather-data-service.js";
 import { capitalise } from "../utils/capitalise-first-char.js";
 import { generateRandomWeatherData } from "../utils/generate-random-weather-data.js";
+import { Weather } from "../weather.js";
 
 export const renderWeeklyForecast = (weeklyData: WeeklyWeatherModel): void => {
   const mainContainer = document.getElementById("forecast-container");
   const week = createDIV();
-  const cards = createDIV();
+  const cards = generateWeekHTML(weeklyData);
+  const footer = createDIV();
 
-  if (!hasAddbutton) {
-    createAddbutton(mainContainer);
+  if (!hasAddButton()) {
+    createAddButton(mainContainer);
   }
 
+  week.innerHTML = cards;
   week.classList.add("weekly-weather-container");
-  cards.innerHTML = fromDataToWeeklyWeatherCardHTML(weeklyData);
 
-  createDeletebutton(cards, week);
-  week.appendChild(cards);
+  createDeletebutton(footer, week);
+
+  week.appendChild(footer);
   mainContainer.appendChild(week);
 };
 
-const fromDataToWeeklyWeatherCardHTML = (
-  weeklyData: WeeklyWeatherModel
-): string => {
+const generateWeekHTML = (weeklyData: WeeklyWeatherModel): string => {
   const weeklyDataList = Object.entries(weeklyData);
+  const service = new WeeklyWeatherService(weeklyData);
+  const temperatureAvg = service.getTemperatureAverage();
 
   return weeklyDataList
     .map(([day, weather]) => createDailyWeatherCard(day, weather))
-    .join("");
+    .join("").concat(`
+      <div class="avg-temperature">
+        <p>Temperatura media: ${temperatureAvg}°C</p>
+      </div>`);
 };
 
-const createDailyWeatherCard = (day: string, weatherData: WeatherModel) => {
+const createDailyWeatherCard = (
+  day: string,
+  weatherData: WeatherModel
+): string => {
   const capitalisedDay = capitalise(day);
+  const averageTemperature = new Weather(
+    weatherData
+  ).getAverageDailyTemperature();
 
   return `
     <div class="daily-forecast-card">
       <h3>${capitalisedDay}</h3>
-      <p>Clima: ${weatherData.weather}</p>
-      <p>Temperatura: ${weatherData.temperature.minTemperature}°C - ${weatherData.temperature.maxTemperature}°C</p>
-      <p>Viento: ${weatherData.windSpeed} km/h</p>
+      <article>
+        <p>Clima: ${weatherData.weather}</p>
+        <p>Temperatura: 
+          <ul>
+            <li>Mínima: ${weatherData.temperature.minTemperature}°C</li>
+            <li>Máxima: ${weatherData.temperature.maxTemperature}°C</li>
+            <li>Media: ${averageTemperature}°C</li>
+          </ul>
+        <p>Viento: ${weatherData.windSpeed} km/h</p>
+      </article>
     </div>`;
 };
 
@@ -52,7 +72,7 @@ const createDeletebutton = (
   parentContainer.appendChild(button);
 };
 
-const createAddbutton = (parentContainer: HTMLElement): void => {
+const createAddButton = (parentContainer: HTMLElement): void => {
   const button = document.createElement("button");
   button.textContent = "Agregar nueva semana";
   button.classList.add("add-week-button");
@@ -70,7 +90,7 @@ const addRandomWeek = (): void => {
   renderWeeklyForecast(randomWeekData);
 };
 
-const hasAddbutton = (): boolean =>
+const hasAddButton = (): boolean =>
   document.getElementsByClassName("add-week-button").length !== 0;
 
 const createDIV = (): HTMLDivElement => document.createElement("div");

@@ -5,7 +5,7 @@ import {
 } from "./model/weather-model.js";
 import { calculateAverageTemperature } from "./utils/calculate-average-temperature.js";
 
-export class WeatherForecast {
+export class Weather {
   weather: WeatherStatus;
   temperature: DailyTemperature;
   windSpeed: number;

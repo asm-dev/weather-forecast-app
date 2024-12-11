@@ -2,13 +2,13 @@ import { WeatherStatus, WeeklyWeatherModel } from "../model/weather-model.js";
 
 export const generateRandomWeatherData = (): WeeklyWeatherModel => {
   const days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
   ];
   const randomWeather = [
     WeatherStatus.SUNNY,
