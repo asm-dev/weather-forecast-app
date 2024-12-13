@@ -8,38 +8,28 @@ import { Weather } from "../weather.js";
 
 export const renderWeeklyForecast = (weeklyData: WeeklyWeatherModel): void => {
   const mainContainer = document.getElementById("forecast-container");
-  const buttonContainer = createDIV();
   const week = createDIV();
-  const cards = generateWeekHTML(weeklyData);
   const footer = createDIV();
+  week.classList.add("weekly-weather-container");
+  footer.classList.add("week-footer");
 
   if (!hasAddButton()) {
-    createAddButton(buttonContainer);
+    renderAddButton(mainContainer);
   }
 
-  week.innerHTML = cards;
-  week.classList.add("weekly-weather-container");
-
-  createDeletebutton(footer, week);
-
+  week.innerHTML = getWeekHTML(weeklyData);
+  renderAvgTemperatureData(footer, weeklyData);
+  renderDeletebutton(footer, week);
   week.appendChild(footer);
-  mainContainer.appendChild(buttonContainer);
   mainContainer.appendChild(week);
 };
 
-const generateWeekHTML = (weeklyData: WeeklyWeatherModel): string => {
-  const weeklyDataList = Object.entries(weeklyData);
-  const service = new WeeklyWeatherService(weeklyData);
-  const temperatureAvg = service.getTemperatureAverage();
-
+const getWeekHTML = (weeklyData: WeeklyWeatherModel): string => {
   return `
     <div class="daily-weather-cards">
-      ${weeklyDataList
+      ${Object.entries(weeklyData)
         .map(([day, weather]) => createDailyWeatherCard(day, weather))
         .join("")}
-    </div>
-    <div class="avg-temperature">
-      <p>Temperatura media: ${temperatureAvg}°C</p>
     </div>`;
 };
 
@@ -55,8 +45,10 @@ const createDailyWeatherCard = (
 
   return `
     <div class="daily-forecast-card">
-      <h3>${capitalisedDay} ${weatherEmoji}</h3>
-      <article>
+      <header>
+        <h3>${capitalisedDay} ${weatherEmoji}</h3>
+      </header>
+      <main>
         <p><span>Clima:</span> ${weatherData.weather}</p>
         <p><span>Temperatura:</span> 
           <ul>
@@ -66,27 +58,44 @@ const createDailyWeatherCard = (
           </ul>
         </p>
         <p><span>Viento:</span> ${weatherData.windSpeed} km/h</p>
-      </article>
+      </main>
     </div>`;
 };
 
-const createDeletebutton = (
+const renderAvgTemperatureData = (
+  parentContainer: HTMLElement,
+  weeklyData: WeeklyWeatherModel
+): void => {
+  const service = new WeeklyWeatherService(weeklyData);
+  const temperatureAvg = service.getTemperatureAverage();
+  const container = createDIV();
+  container.classList.add("avg-temperature");
+  container.innerHTML = `<p>Temperatura media: ${temperatureAvg}°C</p>`;
+  parentContainer.appendChild(container);
+};
+
+const renderDeletebutton = (
   parentContainer: HTMLElement,
   affectedWeek: HTMLDivElement
 ): void => {
+  const container = createDIV();
   const button = document.createElement("button");
   button.textContent = "Borrar semana";
   button.classList.add("delete-week-button");
   button.addEventListener("click", () => deleteWeek(affectedWeek));
-  parentContainer.appendChild(button);
+  container.appendChild(button);
+  parentContainer.appendChild(container);
 };
 
-const createAddButton = (parentContainer: HTMLElement): void => {
+const renderAddButton = (parentContainer: HTMLElement): void => {
+  const container = createDIV();
   const button = document.createElement("button");
-  button.textContent = "Agregar nueva semana";
+  button.textContent = "Agregar semana";
   button.classList.add("add-week-button");
+  container.classList.add("add-week-container");
   button.addEventListener("click", () => addRandomWeek());
-  parentContainer.appendChild(button);
+  container.appendChild(button);
+  parentContainer.appendChild(container);
 };
 
 const deleteWeek = (weekContainer: HTMLDivElement): void => {

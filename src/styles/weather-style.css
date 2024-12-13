@@ -6,13 +6,22 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .header {
   position: relative;
   margin-bottom: 2rem;
   width: 100%;
-  height: 250px;
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
-  color: white;
+  height: 200px;
+  background: linear-gradient(135deg, #39b9dcbe, #0c528fc1);
+  color: rgb(255, 255, 255);
   text-align: center;
   display: flex;
   justify-content: center;
@@ -23,106 +32,61 @@
 }
 
 .header h1 {
-  font-size: 36px;
+  font-size: 2.5rem;
   font-weight: 700;
   z-index: 2;
 }
 
 .cloud {
   position: absolute;
-  top: 50%;
-  left: -150px;
-  width: 200px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   background-color: #ffffff;
-  border-radius: 50px;
-  box-shadow: 40px 0 0 0 #ffffff, 80px 0 0 0 #ffffff, 120px 0 0 0 #ffffff;
-  opacity: 0.8;
-  animation: moveCloud 15s linear infinite;
+  border-radius: 50%;
 }
 
-@keyframes moveCloud {
+.little-cloud {
+  top: 25%;
+  box-shadow: 30px 0 0 0 #ffffff, 60px 0 0 0 #ffffff, inset 90px 0 0 0 #ffffff;
+  opacity: 0.35;
+  animation: cloudLTR 20s linear infinite;
+}
+
+.big-cloud {
+  top: 65%;
+  box-shadow: 30px 0 0 0 #ffffff, 60px 0 0 0 #ffffff, 90px 0 0 0 #ffffff;
+  opacity: 0.85;
+  animation: cloudLTR 50s linear infinite;
+}
+
+@keyframes cloudLTR {
   0% {
-    left: -150px;
-    top: 50%;
+    left: 0%;
   }
   50% {
     left: 50%;
-    top: 40%;
   }
   100% {
     left: 100%;
-    top: 50%;
   }
 }
 
-.cloud-two {
-  position: absolute;
-  top: 60%;
-  left: -300px;
-  width: 250px;
-  height: 70px;
-  background-color: #ffffff;
-  border-radius: 50px;
-  box-shadow: 50px 0 0 0 #ffffff, 100px 0 0 0 #ffffff, 150px 0 0 0 #ffffff;
-  opacity: 0.7;
-  animation: moveCloud 18s linear infinite;
-  animation-delay: 4s;
-}
-
-body {
-  font-family: "Roboto", sans-serif;
-  background-color: #f5f7fa;
-  color: #333;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-button {
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  padding: 0.75rem 1.5rem;
-}
-
-.add-week-button {
-  background-color: #3498db;
-  margin-bottom: 20px;
-}
-
-.add-week-button:hover {
-  background-color: #2980b9;
-  transform: scale(1.05); /* Efecto de agrandamiento al pasar el mouse */
-}
-
-.add-week-button:active {
-  background-color: #1c658c;
-  transform: scale(0.98); /* Efecto de reducción al hacer clic */
-}
-
-.delete-week-button {
-  background-color: #bf5648;
-  padding: 0.75rem 1.5rem; /* Aseguramos que ambos botones tengan el mismo padding */
-}
-
-.delete-week-button:hover {
-  background-color: #a93226;
-  transform: scale(1.05);
-}
-
-.delete-week-button:active {
-  background-color: #922b21;
-  transform: scale(0.98);
+@keyframes bigCloudMoves {
+  0% {
+    left: 0%;
+  }
+  50% {
+    left: 50%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 #forecast-container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Reducido el gap entre las semanas */
+  gap: 1.5rem;
   width: 90%;
   max-width: 1200px;
 }
@@ -147,27 +111,74 @@ button {
   justify-content: center;
 }
 
+button {
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.add-week-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-week-button {
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  padding: 0.75rem 1.5rem;
+  background-color: #4d89c6a9;
+  color: rgb(239, 239, 239);
+}
+
+.add-week-button:hover {
+  background-color: #2980b9;
+  color: white;
+  transform: scale(1.05);
+}
+
+.add-week-button:active {
+  background-color: #1c658c;
+  transform: scale(0.98);
+  color: white;
+}
+
+.delete-week-button {
+  border: 1px solid #cc372a;
+  padding: 0.75rem 1.5rem;
+  background-color: white;
+  color: #cc372a;
+}
+
+.delete-week-button:hover {
+  background-color: #cc372a;
+  color: white;
+  cursor: pointer;
+}
+
+.delete-week-button:active {
+  background-color: #922b21;
+}
+
 .daily-forecast-card {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   text-align: left;
-  background-color: #bddffa2a;
-  border: 1px solid #c5d9e880;
+  background-color: #d6e9f95b;
   border-radius: 8px;
-  padding: 0.75rem;
-  max-width: 200px;
+  padding: 1rem;
+  max-width: 300px;
   height: auto;
 }
 
-.daily-forecast-card article {
+.daily-forecast-card main {
   padding-top: 0.75rem;
 }
 
 .daily-forecast-card h3 {
   font-size: 1rem;
   margin: 0.25rem 0;
-  color: #34495e;
 }
 
 .daily-forecast-card p,
@@ -177,7 +188,7 @@ li {
 }
 
 .daily-forecast-card ul {
-  padding-left: 2rem;
+  padding-left: 1rem;
 }
 
 .daily-forecast-card p {
@@ -190,19 +201,18 @@ li {
   border-radius: 4px;
 }
 
+.week-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .avg-temperature {
   font-size: 1rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid rgb(167, 167, 167);
-  margin-top: 1rem;
-  padding-top: 0.5rem;
+  justify-content: center;
+  align-self: center;
   gap: 1rem;
-}
-
-.avg-temperature p {
-  margin: 0;
 }
 
 /* Media Query for medium screens */
