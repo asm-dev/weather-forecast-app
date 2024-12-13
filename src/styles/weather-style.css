@@ -59,7 +59,7 @@
 .cloud-two {
   position: absolute;
   top: 60%;
-  left: -200px;
+  left: -300px;
   width: 250px;
   height: 70px;
   background-color: #ffffff;
@@ -67,7 +67,7 @@
   box-shadow: 50px 0 0 0 #ffffff, 100px 0 0 0 #ffffff, 150px 0 0 0 #ffffff;
   opacity: 0.7;
   animation: moveCloud 18s linear infinite;
-  animation-delay: 3s;
+  animation-delay: 4s;
 }
 
 body {
@@ -142,9 +142,9 @@ button {
 
 .weekly-weather-container .daily-weather-cards {
   display: flex;
-  flex-wrap: wrap; /* Flex-wrap para que las cards no se desborden */
+  flex-wrap: wrap;
   gap: 1rem;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .daily-forecast-card {
@@ -152,12 +152,16 @@ button {
   flex-direction: column;
   justify-content: flex-start;
   text-align: left;
-  background-color: #eaf2f8;
-  border: 1px solid #c5d9e8;
+  background-color: #bddffa2a;
+  border: 1px solid #c5d9e880;
   border-radius: 8px;
-  padding: 0.75rem; /* Aumentamos el padding */
-  width: 120px;
+  padding: 0.75rem;
+  max-width: 200px;
   height: auto;
+}
+
+.daily-forecast-card article {
+  padding-top: 0.75rem;
 }
 
 .daily-forecast-card h3 {
@@ -173,7 +177,7 @@ li {
 }
 
 .daily-forecast-card ul {
-  padding-left: 1rem;
+  padding-left: 2rem;
 }
 
 .daily-forecast-card p {
@@ -182,8 +186,7 @@ li {
 
 .daily-forecast-card p span {
   font-weight: bold;
-  background-color: #dfe6e9;
-  padding: 0.2rem 0.4rem;
+  padding: 0.4rem 0.2rem 0.4rem 0rem;
   border-radius: 4px;
 }
 
