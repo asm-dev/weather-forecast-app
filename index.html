@@ -3,11 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather App</title>
+    <title>App del Tiempo</title>
     <link rel="stylesheet" href="./src/styles/weather-style.css" />
   </head>
   <body>
-    <h1>Weekly Weather Forecast Information</h1>
+    <header class="header">
+      <h1>App del Tiempo</h1>
+      <div class="cloud"></div>
+      <div class="cloud-two"></div>
+    </header>
     <div id="forecast-container"></div>
     <script type="module" src="dist/app.js" defer></script>
     <script type="module" src="dist/model/weather-model.js"></script>

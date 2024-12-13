@@ -8,12 +8,13 @@ import { Weather } from "../weather.js";
 
 export const renderWeeklyForecast = (weeklyData: WeeklyWeatherModel): void => {
   const mainContainer = document.getElementById("forecast-container");
+  const buttonContainer = createDIV();
   const week = createDIV();
   const cards = generateWeekHTML(weeklyData);
   const footer = createDIV();
 
   if (!hasAddButton()) {
-    createAddButton(mainContainer);
+    createAddButton(buttonContainer);
   }
 
   week.innerHTML = cards;
@@ -22,6 +23,7 @@ export const renderWeeklyForecast = (weeklyData: WeeklyWeatherModel): void => {
   createDeletebutton(footer, week);
 
   week.appendChild(footer);
+  mainContainer.appendChild(buttonContainer);
   mainContainer.appendChild(week);
 };
 
@@ -55,14 +57,15 @@ const createDailyWeatherCard = (
     <div class="daily-forecast-card">
       <h3>${capitalisedDay} ${weatherEmoji}</h3>
       <article>
-        <p>Clima: ${weatherData.weather}</p>
-        <p>Temperatura: 
+        <p><span>Clima:</span> ${weatherData.weather}</p>
+        <p><span>Temperatura:</span> 
           <ul>
             <li>Mínima: ${weatherData.temperature.minTemperature}°C</li>
             <li>Máxima: ${weatherData.temperature.maxTemperature}°C</li>
             <li>Media: ${averageTemperature}°C</li>
           </ul>
-        <p>Viento: ${weatherData.windSpeed} km/h</p>
+        </p>
+        <p><span>Viento:</span> ${weatherData.windSpeed} km/h</p>
       </article>
     </div>`;
 };
