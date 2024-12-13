@@ -10,6 +10,10 @@ Segunda version
 
 ![image](https://github.com/user-attachments/assets/71f2ad14-5073-4ed1-ba38-da684816dcc0)
 
+Version final
+
+![image](https://github.com/user-attachments/assets/02711aee-439b-4b83-873a-1a6fb1fcdf02)
+
 
 ## Para ejecutar el proyecto:
 
