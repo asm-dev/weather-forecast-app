@@ -1,7 +1,5 @@
-import {
-  DailyTemperature,
-  WeeklyWeatherModel,
-} from "../model/weather-model.js";
+import { DailyTemperature } from "../model/weather-model.js";
+import { WeeklyWeatherModel } from "../model/weekly-model.js";
 import { calculateAverageTemperature } from "../utils/calculate-average-temperature.js";
 
 export class WeeklyWeatherService {

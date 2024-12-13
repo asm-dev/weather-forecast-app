@@ -1,14 +1,15 @@
-import { WeatherStatus, WeeklyWeatherModel } from "../model/weather-model.js";
+import { WeatherStatus } from "../model/weather-model.js";
+import { DaysOfTheWeek, WeeklyWeatherModel } from "../model/weekly-model.js";
 
 export const generateRandomWeatherData = (): WeeklyWeatherModel => {
   const days = [
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-    "saturday",
-    "sunday",
+    DaysOfTheWeek.MONDAY,
+    DaysOfTheWeek.TUESDAY,
+    DaysOfTheWeek.WEDNESDAY,
+    DaysOfTheWeek.THURSDAY,
+    DaysOfTheWeek.FRIDAY,
+    DaysOfTheWeek.SATURDAY,
+    DaysOfTheWeek.SUNDAY,
   ];
   const randomWeather = [
     WeatherStatus.SUNNY,
